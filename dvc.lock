@@ -19,6 +19,7 @@ stages:
         data_split:
           test_regions:
           - REGION_1
+          test_pct: 0.1
     outs:
     - path: data/test_data
       hash: md5
@@ -48,8 +49,8 @@ stages:
           random_seed: 42
         train:
           valid_pct: 0.1
-          arch: shufflenet_v2_x2_0
-          img_size: 256
+          arch: resnet34
+          img_size: 128
           batch_size: 8
           fine_tune_args:
             epochs: 8
@@ -57,16 +58,16 @@ stages:
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: 63cb30df484bfa1d6ea2cdebac74876c
-      size: 201725
+      md5: 2559ab826ee4aea21b25263550cff08b
+      size: 175676974
     - path: models/model.pth
       hash: md5
-      md5: 07b113fe1ab01de2d8a5453dccacdd3e
-      size: 165147
+      md5: bc2b66f5fa5636a170c2431c7f5210bc
+      size: 175627270
     - path: results/train
       hash: md5
-      md5: a26429ff680d9b01c7e92043821bf41c.dir
-      size: 955
+      md5: 8bff905dd122455012c59368b1bfd4bf.dir
+      size: 956
       nfiles: 5
   evaluate:
     cmd: python src/evaluate.py
@@ -78,8 +79,8 @@ stages:
       nfiles: 24
     - path: models/model.pkl
       hash: md5
-      md5: 63cb30df484bfa1d6ea2cdebac74876c
-      size: 201725
+      md5: 2559ab826ee4aea21b25263550cff08b
+      size: 175676974
     - path: src/evaluate.py
       hash: md5
       md5: 84d2fd3b371546730396a763a51527a0
@@ -93,8 +94,8 @@ stages:
     outs:
     - path: results/evaluate
       hash: md5
-      md5: 34985c391291e22ac0cfdf6e83ec7268.dir
-      size: 1257936
+      md5: 47519e6db52fcae9f071e20e0d996ed8.dir
+      size: 1255018
       nfiles: 11
   sagemaker:
     cmd: cp models/model.pth sagemaker/code/model.pth && cd sagemaker && tar -cpzf
@@ -102,10 +103,10 @@ stages:
     deps:
     - path: models/model.pth
       hash: md5
-      md5: 07b113fe1ab01de2d8a5453dccacdd3e
-      size: 165147
+      md5: bc2b66f5fa5636a170c2431c7f5210bc
+      size: 175627270
     outs:
     - path: model.tar.gz
       hash: md5
-      md5: c615b812da343d71fcda080597a24525
-      size: 145778
+      md5: a2f79479e113915136398f8d3a3ced93
+      size: 159911709

@@ -1,4 +1,5 @@
 [core]
+    autostage = true
     remote = storage
 ['remote "storage"']
     url = https://remote.dvc.org/get-started-pools

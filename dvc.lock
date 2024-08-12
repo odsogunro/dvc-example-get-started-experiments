@@ -19,6 +19,7 @@ stages:
         data_split:
           test_regions:
           - REGION_1
+          test_pct: 0.1
     outs:
     - path: data/test_data
       hash: md5
@@ -49,7 +50,7 @@ stages:
         train:
           valid_pct: 0.1
           arch: shufflenet_v2_x2_0
-          img_size: 256
+          img_size: 384
           batch_size: 8
           fine_tune_args:
             epochs: 8
@@ -57,16 +58,16 @@ stages:
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: 63cb30df484bfa1d6ea2cdebac74876c
-      size: 201725
+      md5: b13343efaf171f7361381e79e498bca9
+      size: 201469
     - path: models/model.pth
       hash: md5
-      md5: 07b113fe1ab01de2d8a5453dccacdd3e
-      size: 165147
+      md5: 9f919d7521f0ab4ca550358e5e8ad8d1
+      size: 164827
     - path: results/train
       hash: md5
-      md5: a26429ff680d9b01c7e92043821bf41c.dir
-      size: 955
+      md5: b5ba75c600c72ad9e9c98522342836ab.dir
+      size: 952
       nfiles: 5
   evaluate:
     cmd: python src/evaluate.py
@@ -78,8 +79,8 @@ stages:
       nfiles: 24
     - path: models/model.pkl
       hash: md5
-      md5: 63cb30df484bfa1d6ea2cdebac74876c
-      size: 201725
+      md5: b13343efaf171f7361381e79e498bca9
+      size: 201469
     - path: src/evaluate.py
       hash: md5
       md5: 84d2fd3b371546730396a763a51527a0
@@ -93,8 +94,8 @@ stages:
     outs:
     - path: results/evaluate
       hash: md5
-      md5: 34985c391291e22ac0cfdf6e83ec7268.dir
-      size: 1257936
+      md5: c6c43c0f477227bd69c11d2e726ef4c4.dir
+      size: 1259035
       nfiles: 11
   sagemaker:
     cmd: cp models/model.pth sagemaker/code/model.pth && cd sagemaker && tar -cpzf
@@ -102,10 +103,10 @@ stages:
     deps:
     - path: models/model.pth
       hash: md5
-      md5: 07b113fe1ab01de2d8a5453dccacdd3e
-      size: 165147
+      md5: 9f919d7521f0ab4ca550358e5e8ad8d1
+      size: 164827
     outs:
     - path: model.tar.gz
       hash: md5
-      md5: c615b812da343d71fcda080597a24525
-      size: 145778
+      md5: b079d32353c422180be6767bc201f9d7
+      size: 146385

@@ -1065,6 +1065,33 @@ f7abd91  pushy-volt   11:41 AM   Queued
 - run all queued experiments
 ```
 $ dvc exp run --run-all
+
+Failed to reproduce experiment(s) 'arch-size-2, arch-size-5, arch-size-6'
+
+Ran experiment(s): 
+To apply the results of an experiment to your workspace run:
+
+    dvc exp apply <exp>
+```
+
+- ...
+```
+$ dvc queue status     
+Task     Name         Created    Status
+0413ebf  arch-size-2  11:29 AM   Failed
+96fddd6  arch-size-5  11:29 AM   Failed
+d091d4b  arch-size-6  11:29 AM   Failed
+cb1d48a  silty-eild   11:16 AM   Success
+655937f  wersh-whop   11:16 AM   Success
+56c70ef  fussy-pang   11:16 AM   Success
+e4d077a  arch-size-1  11:29 AM   Success
+118066c  arch-size-3  11:29 AM   Success
+8c93ec2  arch-size-4  11:29 AM   Success
+f7abd91  pushy-volt   11:41 AM   Success
+
+Worker status: 0 active, 0 idle
+
+$ dvc exp apply arch-size-1
 ```
 
 - ...
@@ -1112,4 +1139,5 @@ $
 - ...
 ```
 ```
+
 # TODO: not finished yet!
